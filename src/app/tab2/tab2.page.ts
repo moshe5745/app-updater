@@ -12,7 +12,7 @@ export class Tab2Page {
   }
 
   checkForUpdates() {
-    const updateUrl = 'https://github.com/moshe5745/app-updater/blob/master/src/updater-res/version.xsl';
+    const updateUrl = 'https://raw.githubusercontent.com/moshe5745/app-updater/master/src/updater-res/version.xsl';
     this.appUpdate.checkAppUpdate(updateUrl).then(() => {
       console.log('Update available');
     }).catch(error => console.log(error));
