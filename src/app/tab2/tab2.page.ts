@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {AppUpdate} from '@ionic-native/app-update/ngx';
+import {CodePush} from '@ionic-native/code-push/ngx';
+
 
 @Component({
   selector: 'app-tab2',
@@ -8,14 +9,16 @@ import {AppUpdate} from '@ionic-native/app-update/ngx';
 })
 export class Tab2Page {
 
-  constructor(private appUpdate: AppUpdate) {
+  constructor(private codePush: CodePush) {
   }
 
   checkForUpdates() {
-    const updateUrl = 'https://raw.githubusercontent.com/moshe5745/app-updater/master/src/updater-res/version.xsl';
-    this.appUpdate.checkAppUpdate(updateUrl).then(() => {
-      console.log('Update available');
-    }).catch(error => console.log(error));
+    this.codePush.sync().subscribe((syncStatus) => console.log(syncStatus));
+
+    const downloadProgress = (progress) => {
+      console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
+    };
+    this.codePush.sync({}, downloadProgress).subscribe((syncStatus) => console.log(syncStatus));
   }
 
 }
