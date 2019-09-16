@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AppUpdate} from '@ionic-native/app-update/ngx';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(private appUpdate: AppUpdate) {
+  }
+
+  checkForUpdates() {
+    const updateUrl = 'https://github';
+    this.appUpdate.checkAppUpdate(updateUrl).then(() => {
+      console.log('Update available');
+    });
+  }
 
 }
